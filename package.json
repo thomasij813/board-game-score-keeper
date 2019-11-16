@@ -1,0 +1,19 @@
+{
+  "name": "board-game-score-keeper",
+  "version": "1.0.0",
+  "description": "This application allows board game afficianados to keep track of their board game plays.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/thomasij813/board-game-score-keeper.git"
+  },
+  "author": "Thomas Johnson",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/thomasij813/board-game-score-keeper/issues"
+  },
+  "homepage": "https://github.com/thomasij813/board-game-score-keeper#readme"
+}
