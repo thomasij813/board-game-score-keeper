@@ -1,6 +1,7 @@
-import react from 'react';
-import reactDom from 'react-dom';
+import React from 'react';
+import ReactDOM from 'react-dom';
+import AddBoardgame from './components/AddBoardgame.jsx';
 
-const hello = () => console.log('hello world');
+const App = () => <AddBoardgame />;
 
-hello();
+ReactDOM.render(<App />, document.getElementById('app'));
