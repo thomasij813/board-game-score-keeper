@@ -5,7 +5,9 @@
   "main": "server/index.js",
   "scripts": {
     "start": "node server/index.js",
-    "start:dev": "nodemon server/index.js"
+    "start:dev": "nodemon server/index.js",
+    "webpack:dev": "webpack --mode development -w",
+    "webpack:build": "webpack --mode production"
   },
   "repository": {
     "type": "git",
@@ -19,10 +21,21 @@
   "homepage": "https://github.com/thomasij813/board-game-score-keeper#readme",
   "dependencies": {
     "express": "^4.17.1",
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0",
     "request": "^2.88.0",
-    "request-promise": "^4.2.5"
+    "request-promise": "^4.2.5",
+    "xml2js": "^0.4.22"
   },
   "devDependencies": {
-    "nodemon": "^1.19.4"
+    "@babel/core": "^7.7.2",
+    "@babel/preset-env": "^7.7.1",
+    "@babel/preset-react": "^7.7.0",
+    "babel-loader": "^8.0.6",
+    "css-loader": "^3.2.0",
+    "nodemon": "^1.19.4",
+    "style-loader": "^1.0.0",
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.3.10"
   }
 }
