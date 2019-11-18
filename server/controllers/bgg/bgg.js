@@ -3,13 +3,25 @@ const xml2js = require('xml2js');
 
 const parser = new xml2js.Parser();
 
-const mapBggXmlToJson = xml => {
-  if (!xml.items || !xml.items.item) {
+const mapBggDetails = data => {
+  if (!data.items || !data.items.item) {
     return [];
   }
 
-  return xml.items.item.map(game => {
+  return data.items.item.map(game => {
     const obj = { id: game.$.id };
+
+    if (game.thumbnail && game.thumbnail[0]) {
+      obj.thumbnail = game.thumbnail[0];
+    }
+
+    if (game.image && game.image[0]) {
+      obj.image = game.image[0];
+    }
+
+    if (game.description && game.description[0]) {
+      obj.description = game.description[0];
+    }
 
     if (game.yearpublished && game.yearpublished[0]) {
       obj.yearpublished = game.yearpublished[0].$.value;
@@ -24,7 +36,6 @@ const mapBggXmlToJson = xml => {
 };
 
 const search = async (req, res, next) => {
-  console.log('hello');
   const uri = 'http://www.boardgamegeek.com/xmlapi2/search';
   const qs = {
     query: req.query.query,
@@ -33,10 +44,36 @@ const search = async (req, res, next) => {
 
   try {
     const bggXml = await rp.get({ uri, qs });
-    const data = await parser.parseStringPromise(bggXml).then(mapBggXmlToJson);
-    res.json(data);
+    const parsedData = await parser.parseStringPromise(bggXml);
+    const ids =
+      !parsedData.items || !parsedData.items.item
+        ? []
+        : parsedData.items.item.map(game => game.$.id);
+
+    const details = await addBgDetails(ids);
+    res.json(details);
   } catch (error) {
     next(error);
+  }
+};
+
+const addBgDetails = async listOfBoardgames => {
+  if (listOfBoardgames.length === 0) {
+    return [];
+  }
+  const idSearchString = listOfBoardgames.join(',');
+
+  const uri = 'http://www.boardgamegeek.com/xmlapi2/thing';
+  const qs = {
+    id: idSearchString
+  };
+
+  try {
+    const bggXml = await rp.get({ uri, qs });
+    const data = await parser.parseStringPromise(bggXml).then(mapBggDetails);
+    return data;
+  } catch (error) {
+    throw error;
   }
 };
 
