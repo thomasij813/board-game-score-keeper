@@ -24,6 +24,7 @@ const mapBggXmlToJson = xml => {
 };
 
 const search = async (req, res, next) => {
+  console.log('hello');
   const uri = 'http://www.boardgamegeek.com/xmlapi2/search';
   const qs = {
     query: req.query.query,
