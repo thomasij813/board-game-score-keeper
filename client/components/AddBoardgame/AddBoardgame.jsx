@@ -19,7 +19,7 @@ const AddBoardgame = () => {
       </div>
       <div>
         {boardgames.map(boardgame => (
-          <p key={boardgame.id}>{boardgame.name}</p>
+          <p key={boardgame.id}>{boardgame.title}</p>
         ))}
       </div>
     </div>

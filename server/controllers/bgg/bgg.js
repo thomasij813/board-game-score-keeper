@@ -35,6 +35,26 @@ const mapBggDetails = data => {
   });
 };
 
+const addBgDetails = async listOfBoardgames => {
+  if (listOfBoardgames.length === 0) {
+    return [];
+  }
+  const idSearchString = listOfBoardgames.join(',');
+
+  const uri = 'http://www.boardgamegeek.com/xmlapi2/thing';
+  const qs = {
+    id: idSearchString
+  };
+
+  try {
+    const bggXml = await rp.get({ uri, qs });
+    const data = await parser.parseStringPromise(bggXml).then(mapBggDetails);
+    return data;
+  } catch (error) {
+    throw error;
+  }
+};
+
 const search = async (req, res, next) => {
   const uri = 'http://www.boardgamegeek.com/xmlapi2/search';
   const qs = {
@@ -54,26 +74,6 @@ const search = async (req, res, next) => {
     res.json(details);
   } catch (error) {
     next(error);
-  }
-};
-
-const addBgDetails = async listOfBoardgames => {
-  if (listOfBoardgames.length === 0) {
-    return [];
-  }
-  const idSearchString = listOfBoardgames.join(',');
-
-  const uri = 'http://www.boardgamegeek.com/xmlapi2/thing';
-  const qs = {
-    id: idSearchString
-  };
-
-  try {
-    const bggXml = await rp.get({ uri, qs });
-    const data = await parser.parseStringPromise(bggXml).then(mapBggDetails);
-    return data;
-  } catch (error) {
-    throw error;
   }
 };
 

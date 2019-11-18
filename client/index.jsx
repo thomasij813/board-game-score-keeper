@@ -22,7 +22,7 @@ const App = () => (
         <Route exact path="/">
           <h1>Home</h1>
         </Route>
-        <Route path="/add" children={<AddBoardgame />} />
+        <Route exact path="/add" children={<AddBoardgame />} />
         <Route exact path="/boardgame/:id" children={<Boardgame />} />
         <Route>
           <h1>404: Resource Not Found</h1>
