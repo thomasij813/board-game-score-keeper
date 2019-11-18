@@ -9,7 +9,7 @@ const mapBggDetails = data => {
   }
 
   return data.items.item.map(game => {
-    const obj = { id: game.$.id };
+    const obj = { id: parseInt(game.$.id) };
 
     if (game.thumbnail && game.thumbnail[0]) {
       obj.thumbnail = game.thumbnail[0];
@@ -24,7 +24,7 @@ const mapBggDetails = data => {
     }
 
     if (game.yearpublished && game.yearpublished[0]) {
-      obj.yearpublished = game.yearpublished[0].$.value;
+      obj.yearpublished = parseInt(game.yearpublished[0].$.value);
     }
 
     if (game.name && game.name[0]) {
