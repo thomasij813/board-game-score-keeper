@@ -28,7 +28,7 @@ const mapBggDetails = data => {
     }
 
     if (game.name && game.name[0]) {
-      obj.name = game.name[0].$.value;
+      obj.title = game.name[0].$.value;
     }
 
     return obj;
