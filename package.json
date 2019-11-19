@@ -4,10 +4,11 @@
   "description": "This application allows board game afficianados to keep track of their board game plays.",
   "main": "server/index.js",
   "scripts": {
-    "start": "NODE_ENV=production node server/index.js",
+    "start": "npm run tailwind:css && npm run webpack:build && NODE_ENV=production node server/index.js",
     "start:dev": "nodemon server/index.js",
     "webpack:dev": "webpack --mode development -w",
-    "webpack:build": "webpack --mode production"
+    "webpack:build": "webpack --mode production",
+    "tailwind:css": "tailwind build src/tailwind.src.css -c tailwind.js -o src/tailwind.css"
   },
   "repository": {
     "type": "git",
@@ -33,11 +34,17 @@
     "@babel/core": "^7.7.2",
     "@babel/preset-env": "^7.7.1",
     "@babel/preset-react": "^7.7.0",
+    "autoprefixer": "^9.7.2",
     "babel-loader": "^8.0.6",
     "css-loader": "^3.2.0",
+    "html-webpack-plugin": "^3.2.0",
+    "mini-css-extract-plugin": "^0.8.0",
     "morgan": "^1.9.1",
     "nodemon": "^1.19.4",
+    "postcss-cli": "^6.1.3",
+    "postcss-loader": "^3.0.0",
     "style-loader": "^1.0.0",
+    "tailwindcss": "^1.1.3",
     "webpack": "^4.41.2",
     "webpack-cli": "^3.3.10"
   }

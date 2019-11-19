@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import AddBoardgame from './components/AddBoardgame/AddBoardgame.jsx';
 import Boardgame from './components/Boardgame/Boardgame.jsx';
+import './tailwind.css';
 
 const App = () => (
   <Router>

@@ -10,7 +10,7 @@ if (process.env.NODE_ENV !== 'production') {
   app.use(morgan('tiny'));
 }
 
-app.use(express.static('public'));
+app.use(express.static('dist'));
 
 app.get('/api/bgg/search', bgg.search);
 
@@ -22,7 +22,7 @@ app.get('/api/*', (req, res, next) => {
 // For all other requests, send back index.html and let
 // react router handle potential 404
 app.use((req, res, next) => {
-  res.sendFile(path.join(__dirname, '../public/index.html'));
+  res.sendFile(path.join(__dirname, '../dist/index.html'));
 });
 
 app.listen(port, () => console.log(`Listening on port ${port}`));

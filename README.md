@@ -12,7 +12,8 @@ This project requires an environment that has Node and MongoDB installed.
 
 ### Installing
 
-Install packages: `npm install`
+1. Install packages: `npm install`
+2. Set up the tailwind config: `./node_modules/.bin/tailwind init tailwind.js`
 
 ### Development
 
