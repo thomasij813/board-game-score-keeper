@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/thomasij813/board-game-score-keeper#readme",
   "dependencies": {
+    "body-parser": "^1.19.0",
     "express": "^4.17.1",
     "mongoose": "^5.7.11",
     "react": "^16.12.0",

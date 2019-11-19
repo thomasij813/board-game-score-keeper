@@ -11,6 +11,7 @@ const boardgameSchema = new Schema({
   thumbnail: String,
   image: String,
   createdAt: { type: Date, default: Date.now },
+  yearpublished: Number,
   rounds: [roundSchema]
 });
 

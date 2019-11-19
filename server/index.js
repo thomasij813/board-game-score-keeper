@@ -1,6 +1,9 @@
 const path = require('path');
 const express = require('express');
-const bgg = require('./controllers/bgg/bgg.js');
+const bodyParser = require('body-parser');
+const db = require('../db/index.js');
+const bgg = require('./controllers/bgg.js');
+const boardgame = require('./controllers/boardgame.js');
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -11,8 +14,17 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 app.use(express.static('dist'));
+app.use(bodyParser.json());
 
 app.get('/api/bgg/search', bgg.search);
+
+app.post('/api/boardgame', boardgame.save);
+
+app.get('/api/boardgame', boardgame.getAll);
+
+app.get('/api/boardgame/:bggId', boardgame.getOne);
+
+app.post('/api/boardgame/:bggId/round', boardgame.addRound);
 
 // If an api request does not match above, send back 404
 app.get('/api/*', (req, res, next) => {

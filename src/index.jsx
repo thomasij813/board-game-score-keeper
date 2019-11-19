@@ -2,28 +2,32 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import AddBoardgame from './components/AddBoardgame/AddBoardgame.jsx';
+import AddRound from './components/AddRound/AddRound.jsx';
 import Boardgame from './components/Boardgame/Boardgame.jsx';
+import Home from './components/Home/Home.jsx';
 import './tailwind.css';
 
 const App = () => (
   <Router>
-    <div>
+    <div className="container mx-auto">
       <nav>
-        <ul>
-          <li>
+        <ul className="flex">
+          <li className="m-1">
             <Link to="/">Home</Link>
           </li>
-          <li>
-            <Link to="/add">Add</Link>
+          <li className="m-1">
+            <Link to="/add/game">Add Game</Link>
+          </li>
+          <li className="m-1">
+            <Link to="/add/round">Add Round</Link>
           </li>
         </ul>
       </nav>
 
       <Switch>
-        <Route exact path="/">
-          <h1>Home</h1>
-        </Route>
-        <Route exact path="/add" children={<AddBoardgame />} />
+        <Route exact path="/" children={<Home />} />
+        <Route exact path="/add/game" children={<AddBoardgame />} />
+        <Route exact path="/add/round" children={<AddRound />} />
         <Route exact path="/boardgame/:id" children={<Boardgame />} />
         <Route>
           <h1>404: Resource Not Found</h1>

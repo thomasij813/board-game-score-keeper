@@ -9,7 +9,7 @@ const mapBggDetails = data => {
   }
 
   return data.items.item.map(game => {
-    const obj = { id: parseInt(game.$.id) };
+    const obj = { bggId: parseInt(game.$.id) };
 
     if (game.thumbnail && game.thumbnail[0]) {
       obj.thumbnail = game.thumbnail[0];
