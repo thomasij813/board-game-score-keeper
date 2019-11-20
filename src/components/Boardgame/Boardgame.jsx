@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import './Boardgame.css';
 
 const calculateLeaderBoard = boardgame => {
@@ -28,6 +28,18 @@ const calculateLeaderBoard = boardgame => {
     .sort((a, b) => b.score - a.score);
 };
 
+const RoundLink = ({ createdAt, _id, bggId }) => {
+  const dateOptions = {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+  };
+  const playDate = new Date(createdAt);
+  const dateString = playDate.toLocaleString('en-US', dateOptions);
+
+  return <Link to={`/boardgame/${bggId}/round/${_id}`}>{dateString}</Link>;
+};
+
 const getBoardgame = async (id, cb) => {
   const response = await fetch(`/api/boardgame/${id}`);
   const data = await response.json();
@@ -41,28 +53,44 @@ const Boardgame = () => {
     getBoardgame(id, setBoardgame);
   }, []);
 
-  const rounds = boardgame.rounds ? (
-    <p>Rounds Played: {boardgame.rounds.length}</p>
-  ) : null;
-
   const leaderBoard = calculateLeaderBoard(boardgame);
+
+  const roundsList = !boardgame.rounds ? null : (
+    <div className="m-2">
+      <p className="font-semibold">Rounds Played</p>
+      <ul>
+        {boardgame.rounds.map((round, i) => (
+          <li key={round._id}>
+            <RoundLink
+              bggId={boardgame.bggId}
+              createdAt={round.createdAt}
+              _id={round._id}
+            />
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
 
   return (
     <div>
       <p className="text-4xl">{boardgame.title}</p>
-      {rounds}
-      <table className="table-auto">
-        <tbody>
-          {leaderBoard.map((player, i) => {
-            return (
-              <tr key={i}>
-                <td className="border px-4 py-2">{player.name}</td>
-                <td className="border px-4 py-2">{player.score}</td>
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
+      <div className="m-2">
+        <p className="font-semibold">Leaderboard</p>
+        <table className="table-auto">
+          <tbody>
+            {leaderBoard.map((player, i) => {
+              return (
+                <tr key={i}>
+                  <td className="border px-4 py-2">{player.name}</td>
+                  <td className="border px-4 py-2">{player.score}</td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
+      {roundsList}
     </div>
   );
 };

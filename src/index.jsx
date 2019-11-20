@@ -5,6 +5,7 @@ import AddBoardgame from './components/AddBoardgame/AddBoardgame.jsx';
 import AddRound from './components/AddRound/AddRound.jsx';
 import Boardgame from './components/Boardgame/Boardgame.jsx';
 import Home from './components/Home/Home.jsx';
+import Round from './components/Round/Round.jsx';
 import './tailwind.css';
 
 const App = () => (
@@ -29,6 +30,11 @@ const App = () => (
         <Route exact path="/add/game" children={<AddBoardgame />} />
         <Route exact path="/add/round" children={<AddRound />} />
         <Route exact path="/boardgame/:id" children={<Boardgame />} />
+        <Route
+          exact
+          path="/boardgame/:bggId/round/:roundId"
+          children={<Round />}
+        />
         <Route>
           <h1>404: Resource Not Found</h1>
         </Route>

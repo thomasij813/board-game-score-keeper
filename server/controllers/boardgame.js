@@ -58,9 +58,36 @@ const addRound = (req, res, next) => {
   });
 };
 
+const deleteOne = (req, res, next) => {
+  Boardgame.deleteOne({ bggId: req.params.bggId }, function(err, doc) {
+    if (err) {
+      return res.status(500).send();
+    }
+
+    res.status(204).redirect('/');
+  });
+};
+
+const getOneRound = (req, res, next) => {
+  Boardgame.findOne({ bggId: req.params.bggId }, function(err, doc) {
+    if (err) {
+      return res.status(500).send();
+    }
+
+    if (!doc || doc.rounds.length < 1) {
+      return res.status(400).send();
+    }
+
+    const data = doc.rounds.id(req.params.roundId);
+    return data ? res.json(data) : res.status(400).send();
+  });
+};
+
 module.exports = {
   save,
   getAll,
   getOne,
-  addRound
+  addRound,
+  deleteOne,
+  getOneRound
 };
